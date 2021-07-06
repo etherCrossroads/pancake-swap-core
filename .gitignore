@@ -3,3 +3,6 @@ build/
 
 .idea
 contracts/artifacts
+artifacts
+cache
+.env.json
