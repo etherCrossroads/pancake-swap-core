@@ -23,10 +23,10 @@ contract PancakeFactory is IPancakeFactory {
     }
 
     function createPair(address tokenA, address tokenB) external returns (address pair) {
-        require(tokenA != tokenB, 'OpenOcean: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'OpenOcean: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'OpenOcean: PAIR_EXISTS'); // single check is sufficient
+        require(token0 != address(0), 'ZERO_ADDRESS');
+        require(getPair[token0][token1] == address(0), 'PAIR_EXISTS'); // single check is sufficient
         bytes memory bytecode = type(PancakePair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
         assembly {
@@ -40,12 +40,12 @@ contract PancakeFactory is IPancakeFactory {
     }
 
     function setFeeTo(address _feeTo) external {
-        require(msg.sender == feeToSetter, 'OpenOcean: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'FORBIDDEN');
         feeTo = _feeTo;
     }
 
     function setFeeToSetter(address _feeToSetter) external {
-        require(msg.sender == feeToSetter, 'OpenOcean: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'FORBIDDEN');
         feeToSetter = _feeToSetter;
     }
 }
